@@ -18,12 +18,14 @@ var write_table = function(data, tablename){
 };
 
 
-var mobli_paging = function(offset=0) {
+var mobli_paging = function(offset=0, token) {
     //remove paging
     var $paging_block = $("#pagination");
     var $page_lines = $("#pagination li");
     $page_lines.remove();
-    var actoin_url ="/product_ajax.php?offset=" + offset;
+    var token = $("#token").data('token');
+    var actoin_url ="/back_sc/product_ajax.php?offset=" + offset+"&token=" + token;
+
     
     var sc_fc = function(data) {
         write_table(data, "#prd_table");
@@ -34,9 +36,8 @@ var mobli_paging = function(offset=0) {
 
         $('a.paging').click(function() {
             var data_offset = $(this).data('offset');
-            mobli_paging(data_offset);
+            mobli_paging(data_offset, token);
         });
     }
-    ajax_call('get', actoin_url, {'dataType' : 'none'}, sc_fc, "data_get_er");
-
+    ajax_call('get', actoin_url, {'dataType' : 'none'}, sc_fc, "data_get_er");    
 };

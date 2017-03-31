@@ -1,5 +1,7 @@
 <?php
-include '../login_scheck.php';
+include '../back_sc/session.php';
+login_check();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +18,7 @@ include '../login_scheck.php';
 </head>
 <body>
 <h1>상품 리스트 입니다.</h1>
-<div class = "demo"></div>
+<div id = "token" data-token="<?php echo $_SESSION['token']?>"></div>
  <table id='prd_table'>
  	<tr class='table_title'>
  		<th>ID</th>

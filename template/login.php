@@ -1,5 +1,7 @@
 <?php
-include '../login_scheck.php';
+include '../back_sc/session.php';
+include '../back_sc/api_call.php';
+login_check('login');
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +22,8 @@ $('document').ready(function() {
 				username : username,
 				password : password,
 			}
-			var sc_fc = function(){window.location.replace('/template/menu.php');}
+			var sc_fc = function(){
+				window.location.replace('/template/menu.php');}
 			ajax_call("POST", action_url, form_data, sc_fc, 'login');
 		}else{
 			$("#message").html("<p styple='color:green; font-weight:bold'>아이디 또는 비밀번호를 입력해주세요.</p>");
@@ -31,7 +34,7 @@ $('document').ready(function() {
 </script>
 </head>
 <body>
-	<form id="form1" name="form1" action="../login_prcs.php" method="post">
+	<form id="form1" name="form1" action="../back_sc/login_prcs.php" method="post">
 		<label for="username">ID</label>
 		<input type="text" name="username" id="username"><br>
 		<label for='password'>PW</label>

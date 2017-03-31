@@ -1,25 +1,23 @@
 <?php  
-$auth_rslt = include './login_scheck.php';
-include './lib/api_call.php';
+include './api_call.php';
 
-if(!$auth_rslt){
-	return false;
-};
 
-$token = 'Token '.$_SESSION['token'];
-$api_urlinit = 'http://opleapi.cloudapp.net:9999/product/';
+$token = "";
+if(isset($_GET['token'])){
+	$token = 'Token '.$_GET['token'];	
+}
+
+$api_urlinit = '/product/';
 $limit = "20";
 $offset = isset($_GET['offset'])? $_GET['offset']:"0";
 $api_urlset = $api_urlinit."?limit=".$limit."&offset=".$offset;
 
 $opt_array =array(
-	CURLOPT_RETURNTRANSFER => 1,
-	CURLOPT_URL =>$api_urlset,
 	CURLOPT_HTTPHEADER =>array(
 	'Authorization:'.$token,
 	));
 
-$resp=api_call($opt_array);
+$resp=api_call($opt_array, $api_urlset);
 
 $resparray = json_decode($resp[1], true);
 
